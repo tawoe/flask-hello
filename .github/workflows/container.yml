@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Build the Docker image
         run: |
-          echo "${{ vars.DOCKER_HUB_TOKEN }}" | docker login -u "${{ vars.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
+          echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
           docker build . --file Dockerfile --tag docker.io/${{ vars.DOCKER_HUB_ORGANIZATION }}/${{ vars.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA --tag docker.io/${{ vars.DOCKER_HUB_ORGANIZATION }}/${{ vars.DOCKER_HUB_REPOSITORY }}:latest
           docker push docker.io/${{ vars.DOCKER_HUB_ORGANIZATION }}/${{ vars.DOCKER_HUB_REPOSITORY }} --all-tags
           echo docker done
