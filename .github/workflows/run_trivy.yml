@@ -1,4 +1,4 @@
-name: build and publish container
+name: scan build container
 
 on:
   workflow_run:
